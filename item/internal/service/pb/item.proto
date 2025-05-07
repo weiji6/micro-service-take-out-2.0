@@ -1,0 +1,29 @@
+syntax = "proto3";
+package item;
+option go_package = "/internal/service;service";
+
+service ItemService{
+  rpc CreateItem(CreateItemRequest) returns (CreateItemResponse){}
+  rpc DecreaseStock(DecreaseStockRequest) returns (DecreaseStockResponse){}
+}
+
+message CreateItemRequest{
+  int32 item_id = 1;
+  string item_name = 2;
+  float price = 3;
+  int32 stock = 4;
+}
+
+message CreateItemResponse{
+  int32 code = 1;
+  string message = 2;
+}
+
+message DecreaseStockRequest{
+  int32 item_id = 1;
+}
+
+message DecreaseStockResponse{
+  int32 code = 1;
+  string message = 2;
+}
