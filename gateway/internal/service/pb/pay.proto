@@ -1,0 +1,18 @@
+syntax = "proto3";
+package pay;
+option go_package = "/internal/service;service";
+
+service PayService{
+    rpc Pay(PayRequest) returns (PayResponse) {}
+}
+
+message PayRequest{
+    int32 user_id = 1;
+    int32 item_id = 2;
+    float amount = 3;
+}
+
+message PayResponse{
+    int32 code = 1;
+    string message = 2;
+}

@@ -1,7 +1,7 @@
 package handler
 
-import "github.com/google/wire"
-
-var HandlerProvider = wire.NewSet(
-	NewUserHandler,
-)
+//import "github.com/google/wire"
+//
+//var HandlerProvider = wire.NewSet(
+//	NewUserHandler,
+//)

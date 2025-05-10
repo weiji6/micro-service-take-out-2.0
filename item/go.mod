@@ -4,6 +4,8 @@ go 1.24.1
 
 require (
 	github.com/gin-gonic/gin v1.10.0
+	github.com/redis/go-redis/v9 v9.5.1
+	github.com/seata/seata-go v1.2.1
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/viper v1.20.1
 	go.etcd.io/etcd/client/v3 v3.5.21
