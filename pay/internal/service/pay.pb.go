@@ -25,7 +25,8 @@ type PayRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        int32                  `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	ItemId        int32                  `protobuf:"varint,2,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
-	Amount        float32                `protobuf:"fixed32,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	Quantity      int32                  `protobuf:"varint,3,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	Amount        float32                `protobuf:"fixed32,4,opt,name=amount,proto3" json:"amount,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -70,6 +71,13 @@ func (x *PayRequest) GetUserId() int32 {
 func (x *PayRequest) GetItemId() int32 {
 	if x != nil {
 		return x.ItemId
+	}
+	return 0
+}
+
+func (x *PayRequest) GetQuantity() int32 {
+	if x != nil {
+		return x.Quantity
 	}
 	return 0
 }
@@ -137,12 +145,13 @@ var File_pay_proto protoreflect.FileDescriptor
 
 const file_pay_proto_rawDesc = "" +
 	"\n" +
-	"\tpay.proto\x12\x03pay\"V\n" +
+	"\tpay.proto\x12\x03pay\"r\n" +
 	"\n" +
 	"PayRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\x05R\x06userId\x12\x17\n" +
-	"\aitem_id\x18\x02 \x01(\x05R\x06itemId\x12\x16\n" +
-	"\x06amount\x18\x03 \x01(\x02R\x06amount\";\n" +
+	"\aitem_id\x18\x02 \x01(\x05R\x06itemId\x12\x1a\n" +
+	"\bquantity\x18\x03 \x01(\x05R\bquantity\x12\x16\n" +
+	"\x06amount\x18\x04 \x01(\x02R\x06amount\";\n" +
 	"\vPayResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage28\n" +

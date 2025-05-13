@@ -144,6 +144,7 @@ func (x *CreateItemResponse) GetMessage() string {
 type DecreaseStockRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ItemId        int32                  `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	Quantity      int32                  `protobuf:"varint,2,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -181,6 +182,13 @@ func (*DecreaseStockRequest) Descriptor() ([]byte, []int) {
 func (x *DecreaseStockRequest) GetItemId() int32 {
 	if x != nil {
 		return x.ItemId
+	}
+	return 0
+}
+
+func (x *DecreaseStockRequest) GetQuantity() int32 {
+	if x != nil {
+		return x.Quantity
 	}
 	return 0
 }
@@ -250,9 +258,10 @@ const file_item_proto_rawDesc = "" +
 	"\x05stock\x18\x04 \x01(\x05R\x05stock\"B\n" +
 	"\x12CreateItemResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage\"/\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"K\n" +
 	"\x14DecreaseStockRequest\x12\x17\n" +
-	"\aitem_id\x18\x01 \x01(\x05R\x06itemId\"E\n" +
+	"\aitem_id\x18\x01 \x01(\x05R\x06itemId\x12\x1a\n" +
+	"\bquantity\x18\x02 \x01(\x05R\bquantity\"E\n" +
 	"\x15DecreaseStockResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
 	"\amessage\x18\x02 \x01(\tR\amessage2\x9c\x01\n" +

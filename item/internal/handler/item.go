@@ -33,7 +33,7 @@ func (i *ItemHandler) CreateItem(ctx context.Context, req *service.CreateItemReq
 }
 
 func (i *ItemHandler) DecreaseStock(ctx context.Context, req *service.DecreaseStockRequest) (*service.DecreaseStockResponse, error) {
-	err := i.itemRepo.DecreaseStock(int(req.ItemId))
+	err := i.itemRepo.DecreaseStock(int(req.ItemId), int(req.Quantity))
 	if err != nil {
 		return &service.DecreaseStockResponse{
 			Code:    500,

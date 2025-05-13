@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
@@ -21,10 +22,10 @@ func main() {
 
 	// 服务的注册
 	etcdRegister := discovery.NewRegister(etcdAddress, logrus.New())
-	grpcAddress := viper.GetString("service.grpcAddress")
+	grpcRegisterAddress := viper.GetString("service.grpcRegisterAddress")
 	userNode := discovery.Server{
 		Name:    viper.GetString("service.domain"),
-		Address: grpcAddress,
+		Address: grpcRegisterAddress,
 	}
 
 	server := grpc.NewServer()
@@ -32,7 +33,10 @@ func main() {
 
 	// 绑定服务
 	service.RegisterUserServiceServer(server, handler.NewUserHandler())
-	lis, err := net.Listen("tcp", grpcAddress)
+
+	grpcListenAddress := viper.GetString("service.grpcListenAddress")
+	fmt.Println(grpcListenAddress)
+	lis, err := net.Listen("tcp", grpcListenAddress)
 	if err != nil {
 		panic(err)
 	}

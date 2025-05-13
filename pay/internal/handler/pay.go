@@ -15,7 +15,7 @@ func NewPayHandler(PayService *service.PayService) *PayHandler {
 }
 
 func (p *PayHandler) Pay(ctx context.Context, req *service.PayRequest) (*service.PayResponse, error) {
-	err := p.payService.ProcessPayment(req.UserId, req.ItemId, req.Amount)
+	err := p.payService.ProcessPayment(req.UserId, req.ItemId, req.Quantity, req.Amount)
 	if err != nil {
 		return &service.PayResponse{
 			Code:    500,

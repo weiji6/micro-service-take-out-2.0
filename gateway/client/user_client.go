@@ -2,12 +2,15 @@ package client
 
 import (
 	"gateway/internal/service"
+	"github.com/spf13/viper"
 	"google.golang.org/grpc"
 	"log"
 )
 
 func NewUserClient() service.UserServiceClient {
-	conn, err := grpc.Dial("0.0.0.0:30001", grpc.WithInsecure())
+	userServiceAddress := viper.GetString("service.userServiceAddress")
+
+	conn, err := grpc.Dial(userServiceAddress, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("无法连接到User服务:%v", err)
 	}

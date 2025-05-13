@@ -1,5 +1,8 @@
 .idea/
 
+gateway/config/config.yaml
 pay/config/config.yaml
 item/config/config.yaml
 user/config/config.yaml
+
+k8s/

@@ -1,11 +1,14 @@
 package main
 
 import (
+	"gateway/config"
 	"gateway/handler"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	config.InitConfig()
+
 	r := gin.Default()
 
 	userHandler := handler.NewUserHandler()

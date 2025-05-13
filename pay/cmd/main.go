@@ -10,13 +10,15 @@ import (
 	"pay/internal/handler"
 	"pay/internal/repository"
 	"pay/internal/service"
+	"pay/pkg/lock"
 )
 
 func main() {
 	config.InitConfig()
+	lock.InitRedisLock()
 
-	userServiceAddr := viper.GetString("service.userAddress")
-	itemServiceAddr := viper.GetString("service.itemAddress")
+	userServiceAddr := viper.GetString("service.userRegisterAddress")
+	itemServiceAddr := viper.GetString("service.itemRegisterAddress")
 
 	connUser, err := grpc.Dial(userServiceAddr, grpc.WithInsecure())
 	if err != nil {
@@ -39,10 +41,10 @@ func main() {
 	etcdAddress := []string{viper.GetString("etcd.address")}
 
 	etcdRegister := discovery.NewRegister(etcdAddress, logrus.New())
-	grpcAddress := viper.GetString("service.grpcAddress")
+	grpcRegisterAddress := viper.GetString("service.payRegisterAddress")
 	userNode := discovery.Server{
 		Name:    viper.GetString("service.domain"),
-		Address: grpcAddress,
+		Address: grpcRegisterAddress,
 	}
 
 	server := grpc.NewServer()
@@ -50,7 +52,8 @@ func main() {
 
 	service.RegisterPayServiceServer(server, payHandler)
 
-	lis, err := net.Listen("tcp", grpcAddress)
+	grpcListenAddress := viper.GetString("service.grpcListenAddress")
+	lis, err := net.Listen("tcp", grpcListenAddress)
 	if err != nil {
 		panic(err)
 	}

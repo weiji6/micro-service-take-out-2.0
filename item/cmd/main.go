@@ -28,10 +28,10 @@ func main() {
 
 	// 服务的注册
 	etcdRegister := discovery.NewRegister(etcdAddress, logrus.New())
-	grpcAddress := viper.GetString("service.grpcAddress")
+	grpcRegisterAddress := viper.GetString("service.grpcRegisterAddress")
 	userNode := discovery.Server{
 		Name:    viper.GetString("service.domain"),
-		Address: grpcAddress,
+		Address: grpcRegisterAddress,
 	}
 
 	server := grpc.NewServer()
@@ -39,7 +39,9 @@ func main() {
 
 	// 绑定服务
 	service.RegisterItemServiceServer(server, handler.NewItemHandler(itemRepository))
-	lis, err := net.Listen("tcp", grpcAddress)
+
+	grpcListenAddress := viper.GetString("service.grpcListenAddress")
+	lis, err := net.Listen("tcp", grpcListenAddress)
 	if err != nil {
 		panic(err)
 	}

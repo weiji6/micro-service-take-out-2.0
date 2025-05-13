@@ -32,9 +32,10 @@ func (p *PayHandler) ProcessPayment(c *gin.Context) {
 	}
 
 	req := &service.PayRequest{
-		UserId: int32(pay.UserID),
-		ItemId: int32(pay.ItemID),
-		Amount: pay.Amount,
+		UserId:   int32(pay.UserID),
+		ItemId:   int32(pay.ItemID),
+		Quantity: int32(pay.Quantity),
+		Amount:   pay.Amount,
 	}
 
 	resp, err := p.payClient.Pay(context.Background(), req)

@@ -6,7 +6,8 @@ type RegisterRequest struct {
 }
 
 type PayRequest struct {
-	UserID int     `json:"user_id"`
-	ItemID int     `json:"item_id"`
-	Amount float32 `json:"amount"`
+	UserID   int     `json:"user_id"`
+	ItemID   int     `json:"item_id"`
+	Quantity int     `json:"quantity"`
+	Amount   float32 `json:"amount"`
 }
