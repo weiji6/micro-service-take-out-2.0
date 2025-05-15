@@ -3,9 +3,11 @@ package user;
 option go_package = "/internal/service;service";
 
 service UserService{
-    rpc Register(RegisterRequest) returns (RegisterResponse){}
+    rpc Register(RegisterRequest) returns (RegisterResponse);
     rpc CheckBalance(CheckBalanceRequest) returns (CheckBalanceResponse);
     rpc DecreaseBalance(DecreaseBalanceRequest) returns (DecreaseBalanceResponse);
+
+    rpc DecreaseBalanceRevert(DecreaseBalanceRequest) returns (DecreaseBalanceResponse);
 }
 
 message RegisterRequest{

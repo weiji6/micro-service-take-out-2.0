@@ -3,8 +3,10 @@ package handler
 import (
 	"context"
 	"errors"
+	"fmt"
 	"user/internal/repository"
 	"user/internal/service"
+
 	"gorm.io/gorm"
 )
 
@@ -109,4 +111,18 @@ func (u *UserHandler) DecreaseBalance(ctx context.Context, req *service.Decrease
 		Code:    200,
 		Message: "扣款成功",
 	}, nil
+}
+
+func (u *UserHandler) DecreaseBalanceRevert(ctx context.Context, req *service.DecreaseBalanceRequest) (*service.DecreaseBalanceResponse, error) {
+	fmt.Printf("[User] 回滚扣款，用户ID: %d 金额: %.2f\n", req.UserId, req.Amount)
+
+	err := repository.DB.Model(&repository.User{}).
+		Where("id = ?", req.UserId).
+		Update("balance", gorm.Expr("balance + ?", req.Amount)).Error
+
+	if err != nil {
+		return &service.DecreaseBalanceResponse{Code: 500, Message: "回滚失败: " + err.Error()}, err
+	}
+
+	return &service.DecreaseBalanceResponse{Code: 200, Message: "余额回滚成功"}, nil
 }

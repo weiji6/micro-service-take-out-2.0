@@ -1,16 +1,16 @@
 package main
 
 import (
-	"fmt"
-	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
-	"google.golang.org/grpc"
 	"net"
 	"user/config"
 	"user/discovery"
 	"user/internal/handler"
 	"user/internal/repository"
 	"user/internal/service"
+
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
+	"google.golang.org/grpc"
 )
 
 func main() {
@@ -35,7 +35,7 @@ func main() {
 	service.RegisterUserServiceServer(server, handler.NewUserHandler())
 
 	grpcListenAddress := viper.GetString("service.grpcListenAddress")
-	fmt.Println(grpcListenAddress)
+
 	lis, err := net.Listen("tcp", grpcListenAddress)
 	if err != nil {
 		panic(err)

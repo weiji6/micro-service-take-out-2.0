@@ -3,7 +3,10 @@ package pay;
 option go_package = "/internal/service;service";
 
 service PayService{
-    rpc Pay(PayRequest) returns (PayResponse) {}
+    rpc Pay(PayRequest) returns (PayResponse);
+    rpc CreateOrder(PayRequest) returns (PayResponse);
+
+    rpc PayRevert(PayRequest) returns (PayResponse);
 }
 
 message PayRequest{

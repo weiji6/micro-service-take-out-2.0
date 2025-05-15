@@ -1,15 +1,16 @@
 package main
 
 import (
-	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
-	"google.golang.org/grpc"
 	"item/config"
 	"item/discovery"
 	"item/internal/handler"
 	"item/internal/repository"
 	"item/internal/service"
 	"net"
+
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
+	"google.golang.org/grpc"
 )
 
 func main() {

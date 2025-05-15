@@ -32,6 +32,6 @@ WORKDIR /app
 COPY --from=builder /app/gateway-app .
 
 # 开放 gRPC 端口（按你实际用的）
-EXPOSE 30002
+EXPOSE 8080
 
 CMD ["./gateway-app"]

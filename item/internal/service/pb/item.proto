@@ -3,8 +3,11 @@ package item;
 option go_package = "/internal/service;service";
 
 service ItemService{
-  rpc CreateItem(CreateItemRequest) returns (CreateItemResponse){}
-  rpc DecreaseStock(DecreaseStockRequest) returns (DecreaseStockResponse){}
+  rpc CreateItem(CreateItemRequest) returns (CreateItemResponse);
+  rpc DecreaseStock(DecreaseStockRequest) returns (DecreaseStockResponse);
+
+  rpc DecreaseStockRevert(DecreaseStockRequest) returns (DecreaseStockResponse);
+  rpc GetItemList(GetItemListRequest) returns (GetItemListResponse);
 }
 
 message CreateItemRequest{
@@ -27,4 +30,23 @@ message DecreaseStockRequest{
 message DecreaseStockResponse{
   int32 code = 1;
   string message = 2;
+}
+
+message GetItemListRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+message GetItemListResponse {
+  int32 code = 1;
+  string message = 2;
+  repeated ItemInfo items = 3;
+  int32 total = 4;
+}
+
+message ItemInfo {
+  int32 item_id = 1;
+  string item_name = 2;
+  float price = 3;
+  int32 stock = 4;
 }

@@ -19,7 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	PayService_Pay_FullMethodName = "/pay.PayService/Pay"
+	PayService_Pay_FullMethodName         = "/pay.PayService/Pay"
+	PayService_CreateOrder_FullMethodName = "/pay.PayService/CreateOrder"
+	PayService_PayRevert_FullMethodName   = "/pay.PayService/PayRevert"
 )
 
 // PayServiceClient is the client API for PayService service.
@@ -27,6 +29,8 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PayServiceClient interface {
 	Pay(ctx context.Context, in *PayRequest, opts ...grpc.CallOption) (*PayResponse, error)
+	CreateOrder(ctx context.Context, in *PayRequest, opts ...grpc.CallOption) (*PayResponse, error)
+	PayRevert(ctx context.Context, in *PayRequest, opts ...grpc.CallOption) (*PayResponse, error)
 }
 
 type payServiceClient struct {
@@ -47,11 +51,33 @@ func (c *payServiceClient) Pay(ctx context.Context, in *PayRequest, opts ...grpc
 	return out, nil
 }
 
+func (c *payServiceClient) CreateOrder(ctx context.Context, in *PayRequest, opts ...grpc.CallOption) (*PayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PayResponse)
+	err := c.cc.Invoke(ctx, PayService_CreateOrder_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *payServiceClient) PayRevert(ctx context.Context, in *PayRequest, opts ...grpc.CallOption) (*PayResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PayResponse)
+	err := c.cc.Invoke(ctx, PayService_PayRevert_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PayServiceServer is the server API for PayService service.
 // All implementations must embed UnimplementedPayServiceServer
 // for forward compatibility.
 type PayServiceServer interface {
 	Pay(context.Context, *PayRequest) (*PayResponse, error)
+	CreateOrder(context.Context, *PayRequest) (*PayResponse, error)
+	PayRevert(context.Context, *PayRequest) (*PayResponse, error)
 	mustEmbedUnimplementedPayServiceServer()
 }
 
@@ -64,6 +90,12 @@ type UnimplementedPayServiceServer struct{}
 
 func (UnimplementedPayServiceServer) Pay(context.Context, *PayRequest) (*PayResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Pay not implemented")
+}
+func (UnimplementedPayServiceServer) CreateOrder(context.Context, *PayRequest) (*PayResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOrder not implemented")
+}
+func (UnimplementedPayServiceServer) PayRevert(context.Context, *PayRequest) (*PayResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PayRevert not implemented")
 }
 func (UnimplementedPayServiceServer) mustEmbedUnimplementedPayServiceServer() {}
 func (UnimplementedPayServiceServer) testEmbeddedByValue()                    {}
@@ -104,6 +136,42 @@ func _PayService_Pay_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PayService_CreateOrder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PayServiceServer).CreateOrder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PayService_CreateOrder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PayServiceServer).CreateOrder(ctx, req.(*PayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PayService_PayRevert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PayRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PayServiceServer).PayRevert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PayService_PayRevert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PayServiceServer).PayRevert(ctx, req.(*PayRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PayService_ServiceDesc is the grpc.ServiceDesc for PayService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -114,6 +182,14 @@ var PayService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Pay",
 			Handler:    _PayService_Pay_Handler,
+		},
+		{
+			MethodName: "CreateOrder",
+			Handler:    _PayService_CreateOrder_Handler,
+		},
+		{
+			MethodName: "PayRevert",
+			Handler:    _PayService_PayRevert_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

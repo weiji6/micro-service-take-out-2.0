@@ -154,10 +154,12 @@ const file_pay_proto_rawDesc = "" +
 	"\x06amount\x18\x04 \x01(\x02R\x06amount\";\n" +
 	"\vPayResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage28\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage2\x98\x01\n" +
 	"\n" +
-	"PayService\x12*\n" +
-	"\x03Pay\x12\x0f.pay.PayRequest\x1a\x10.pay.PayResponse\"\x00B\x1bZ\x19/internal/service;serviceb\x06proto3"
+	"PayService\x12(\n" +
+	"\x03Pay\x12\x0f.pay.PayRequest\x1a\x10.pay.PayResponse\x120\n" +
+	"\vCreateOrder\x12\x0f.pay.PayRequest\x1a\x10.pay.PayResponse\x12.\n" +
+	"\tPayRevert\x12\x0f.pay.PayRequest\x1a\x10.pay.PayResponseB\x1bZ\x19/internal/service;serviceb\x06proto3"
 
 var (
 	file_pay_proto_rawDescOnce sync.Once
@@ -178,9 +180,13 @@ var file_pay_proto_goTypes = []any{
 }
 var file_pay_proto_depIdxs = []int32{
 	0, // 0: pay.PayService.Pay:input_type -> pay.PayRequest
-	1, // 1: pay.PayService.Pay:output_type -> pay.PayResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	0, // 1: pay.PayService.CreateOrder:input_type -> pay.PayRequest
+	0, // 2: pay.PayService.PayRevert:input_type -> pay.PayRequest
+	1, // 3: pay.PayService.Pay:output_type -> pay.PayResponse
+	1, // 4: pay.PayService.CreateOrder:output_type -> pay.PayResponse
+	1, // 5: pay.PayService.PayRevert:output_type -> pay.PayResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

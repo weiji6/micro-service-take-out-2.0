@@ -3,8 +3,10 @@ package item;
 option go_package = "/internal/service;service";
 
 service ItemService{
-  rpc CreateItem(CreateItemRequest) returns (CreateItemResponse){}
-  rpc DecreaseStock(DecreaseStockRequest) returns (DecreaseStockResponse){}
+  rpc CreateItem(CreateItemRequest) returns (CreateItemResponse);
+  rpc DecreaseStock(DecreaseStockRequest) returns (DecreaseStockResponse);
+
+  rpc DecreaseStockRevert(DecreaseStockRequest) returns (DecreaseStockResponse);
 }
 
 message CreateItemRequest{

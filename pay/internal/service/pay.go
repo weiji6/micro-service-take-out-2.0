@@ -4,16 +4,18 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"pay/internal/repository"
 	"pay/pkg/lock"
 )
 
 type PayService struct {
 	UserClient UserServiceClient
 	ItemClient ItemServiceClient
+	PayRepo    repository.PayRepository
 }
 
-func NewPayService(userClient UserServiceClient, ItemClient ItemServiceClient) *PayService {
-	return &PayService{UserClient: userClient, ItemClient: ItemClient}
+func NewPayService(userClient UserServiceClient, ItemClient ItemServiceClient, payRepo repository.PayRepository) *PayService {
+	return &PayService{UserClient: userClient, ItemClient: ItemClient, PayRepo: payRepo}
 }
 
 func (p *PayService) ProcessPayment(userID int32, itemID int32, quantity int32, amount float32) error {
@@ -58,4 +60,13 @@ func (p *PayService) ProcessPayment(userID int32, itemID int32, quantity int32, 
 	}
 
 	return nil
+}
+
+func (p *PayService) CreateOrder(userID int32, itemID int32, quantity int32, amount float32) error {
+	err := p.ProcessPayment(userID, itemID, quantity, amount)
+	if err != nil {
+		return err
+	}
+
+	return p.PayRepo.CreatePay(int(userID), int(itemID), amount)
 }

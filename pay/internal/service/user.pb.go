@@ -356,11 +356,12 @@ const file_user_proto_rawDesc = "" +
 	"\x06amount\x18\x02 \x01(\x02R\x06amount\"G\n" +
 	"\x17DecreaseBalanceResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\xe1\x01\n" +
-	"\vUserService\x12;\n" +
-	"\bRegister\x12\x15.user.RegisterRequest\x1a\x16.user.RegisterResponse\"\x00\x12E\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage2\xb5\x02\n" +
+	"\vUserService\x129\n" +
+	"\bRegister\x12\x15.user.RegisterRequest\x1a\x16.user.RegisterResponse\x12E\n" +
 	"\fCheckBalance\x12\x19.user.CheckBalanceRequest\x1a\x1a.user.CheckBalanceResponse\x12N\n" +
-	"\x0fDecreaseBalance\x12\x1c.user.DecreaseBalanceRequest\x1a\x1d.user.DecreaseBalanceResponseB\x1bZ\x19/internal/service;serviceb\x06proto3"
+	"\x0fDecreaseBalance\x12\x1c.user.DecreaseBalanceRequest\x1a\x1d.user.DecreaseBalanceResponse\x12T\n" +
+	"\x15DecreaseBalanceRevert\x12\x1c.user.DecreaseBalanceRequest\x1a\x1d.user.DecreaseBalanceResponseB\x1bZ\x19/internal/service;serviceb\x06proto3"
 
 var (
 	file_user_proto_rawDescOnce sync.Once
@@ -387,11 +388,13 @@ var file_user_proto_depIdxs = []int32{
 	0, // 0: user.UserService.Register:input_type -> user.RegisterRequest
 	2, // 1: user.UserService.CheckBalance:input_type -> user.CheckBalanceRequest
 	4, // 2: user.UserService.DecreaseBalance:input_type -> user.DecreaseBalanceRequest
-	1, // 3: user.UserService.Register:output_type -> user.RegisterResponse
-	3, // 4: user.UserService.CheckBalance:output_type -> user.CheckBalanceResponse
-	5, // 5: user.UserService.DecreaseBalance:output_type -> user.DecreaseBalanceResponse
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
+	4, // 3: user.UserService.DecreaseBalanceRevert:input_type -> user.DecreaseBalanceRequest
+	1, // 4: user.UserService.Register:output_type -> user.RegisterResponse
+	3, // 5: user.UserService.CheckBalance:output_type -> user.CheckBalanceResponse
+	5, // 6: user.UserService.DecreaseBalance:output_type -> user.DecreaseBalanceResponse
+	5, // 7: user.UserService.DecreaseBalanceRevert:output_type -> user.DecreaseBalanceResponse
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

@@ -2,8 +2,9 @@ package repository
 
 import (
 	"errors"
-	"gorm.io/gorm"
 	"user/internal/service"
+
+	"gorm.io/gorm"
 )
 
 type User struct {
@@ -11,19 +12,6 @@ type User struct {
 	UserName string  `json:"name"`
 	Balance  float64 `json:"balance"`
 }
-
-//type UserRepository interface {
-//	CreateUser(userID int, userName string) error
-//	DecreaseBalance(userID int, amount float64) error
-//}
-//
-//type UserRepositoryImpl struct {
-//	db *gorm.DB
-//}
-//
-//func NewUserRepositoryImpl(db *gorm.DB) *UserRepositoryImpl {
-//	return &UserRepositoryImpl{db: db}
-//}
 
 // CheckUserExist 检查用户是否存在
 func (u *User) CheckUserExist(req *service.RegisterRequest) bool {
@@ -49,7 +37,3 @@ func (u *User) CreateUser(req *service.RegisterRequest) (user User, err error) {
 	err = DB.Create(&user).Error
 	return user, err
 }
-
-//func (u *User) DecreaseBalance(userID int, amount float64) error {
-//	return u.db.Model(&User{}).Where("id = ? AND balance >= ?", userID, amount).Update("balance", gorm.Expr("balance - ?", amount)).Error
-//}

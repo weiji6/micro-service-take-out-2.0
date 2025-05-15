@@ -2,6 +2,7 @@ package repository
 
 import (
 	"errors"
+
 	"gorm.io/gorm"
 )
 
@@ -15,6 +16,7 @@ type Item struct {
 type ItemRepository interface {
 	CreateItem(itemID int, itemName string, price float64, stock int) error
 	DecreaseStock(itemID int, quantity int) error
+	GetItemList(page, pageSize int) ([]Item, int64, error)
 }
 
 type ItemRepositoryImpl struct {
@@ -48,4 +50,23 @@ func (i *ItemRepositoryImpl) DecreaseStock(itemID int, quantity int) error {
 
 	item.Stock -= quantity
 	return i.db.Save(&item).Error
+}
+
+func (i *ItemRepositoryImpl) GetItemList(page, pageSize int) ([]Item, int64, error) {
+	var items []Item
+	var total int64
+
+	offset := (page - 1) * pageSize
+
+	// 获取总数
+	if err := i.db.Model(&Item{}).Count(&total).Error; err != nil {
+		return nil, 0, err
+	}
+
+	// 获取分页数据
+	if err := i.db.Offset(offset).Limit(pageSize).Find(&items).Error; err != nil {
+		return nil, 0, err
+	}
+
+	return items, total, nil
 }

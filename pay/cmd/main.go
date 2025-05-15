@@ -1,9 +1,6 @@
 package main
 
 import (
-	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
-	"google.golang.org/grpc"
 	"net"
 	"pay/config"
 	"pay/discovery"
@@ -11,11 +8,16 @@ import (
 	"pay/internal/repository"
 	"pay/internal/service"
 	"pay/pkg/lock"
+
+	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
+	"google.golang.org/grpc"
 )
 
 func main() {
 	config.InitConfig()
 	lock.InitRedisLock()
+	repository.InitDB()
 
 	userServiceAddr := viper.GetString("service.userRegisterAddress")
 	itemServiceAddr := viper.GetString("service.itemRegisterAddress")
@@ -34,7 +36,8 @@ func main() {
 	userService := service.NewUserServiceClient(connUser)
 	itemService := service.NewItemServiceClient(connItem)
 
-	payService := service.NewPayService(userService, itemService)
+	payRepo := repository.NewPayRepositoryImpl(repository.DB)
+	payService := service.NewPayService(userService, itemService, payRepo)
 
 	payHandler := handler.NewPayHandler(payService)
 
@@ -65,6 +68,4 @@ func main() {
 	if err = server.Serve(lis); err != nil {
 		panic(err)
 	}
-
-	repository.InitDB()
 }

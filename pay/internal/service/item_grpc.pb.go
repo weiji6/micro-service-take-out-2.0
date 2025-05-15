@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ItemService_CreateItem_FullMethodName    = "/item.ItemService/CreateItem"
-	ItemService_DecreaseStock_FullMethodName = "/item.ItemService/DecreaseStock"
+	ItemService_CreateItem_FullMethodName          = "/item.ItemService/CreateItem"
+	ItemService_DecreaseStock_FullMethodName       = "/item.ItemService/DecreaseStock"
+	ItemService_DecreaseStockRevert_FullMethodName = "/item.ItemService/DecreaseStockRevert"
 )
 
 // ItemServiceClient is the client API for ItemService service.
@@ -29,6 +30,7 @@ const (
 type ItemServiceClient interface {
 	CreateItem(ctx context.Context, in *CreateItemRequest, opts ...grpc.CallOption) (*CreateItemResponse, error)
 	DecreaseStock(ctx context.Context, in *DecreaseStockRequest, opts ...grpc.CallOption) (*DecreaseStockResponse, error)
+	DecreaseStockRevert(ctx context.Context, in *DecreaseStockRequest, opts ...grpc.CallOption) (*DecreaseStockResponse, error)
 }
 
 type itemServiceClient struct {
@@ -59,12 +61,23 @@ func (c *itemServiceClient) DecreaseStock(ctx context.Context, in *DecreaseStock
 	return out, nil
 }
 
+func (c *itemServiceClient) DecreaseStockRevert(ctx context.Context, in *DecreaseStockRequest, opts ...grpc.CallOption) (*DecreaseStockResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DecreaseStockResponse)
+	err := c.cc.Invoke(ctx, ItemService_DecreaseStockRevert_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ItemServiceServer is the server API for ItemService service.
 // All implementations must embed UnimplementedItemServiceServer
 // for forward compatibility.
 type ItemServiceServer interface {
 	CreateItem(context.Context, *CreateItemRequest) (*CreateItemResponse, error)
 	DecreaseStock(context.Context, *DecreaseStockRequest) (*DecreaseStockResponse, error)
+	DecreaseStockRevert(context.Context, *DecreaseStockRequest) (*DecreaseStockResponse, error)
 	mustEmbedUnimplementedItemServiceServer()
 }
 
@@ -80,6 +93,9 @@ func (UnimplementedItemServiceServer) CreateItem(context.Context, *CreateItemReq
 }
 func (UnimplementedItemServiceServer) DecreaseStock(context.Context, *DecreaseStockRequest) (*DecreaseStockResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DecreaseStock not implemented")
+}
+func (UnimplementedItemServiceServer) DecreaseStockRevert(context.Context, *DecreaseStockRequest) (*DecreaseStockResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DecreaseStockRevert not implemented")
 }
 func (UnimplementedItemServiceServer) mustEmbedUnimplementedItemServiceServer() {}
 func (UnimplementedItemServiceServer) testEmbeddedByValue()                     {}
@@ -138,6 +154,24 @@ func _ItemService_DecreaseStock_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ItemService_DecreaseStockRevert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DecreaseStockRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ItemServiceServer).DecreaseStockRevert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ItemService_DecreaseStockRevert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ItemServiceServer).DecreaseStockRevert(ctx, req.(*DecreaseStockRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ItemService_ServiceDesc is the grpc.ServiceDesc for ItemService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -152,6 +186,10 @@ var ItemService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DecreaseStock",
 			Handler:    _ItemService_DecreaseStock_Handler,
+		},
+		{
+			MethodName: "DecreaseStockRevert",
+			Handler:    _ItemService_DecreaseStockRevert_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

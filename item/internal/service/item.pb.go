@@ -245,6 +245,194 @@ func (x *DecreaseStockResponse) GetMessage() string {
 	return ""
 }
 
+type GetItemListRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetItemListRequest) Reset() {
+	*x = GetItemListRequest{}
+	mi := &file_item_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetItemListRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetItemListRequest) ProtoMessage() {}
+
+func (x *GetItemListRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetItemListRequest.ProtoReflect.Descriptor instead.
+func (*GetItemListRequest) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetItemListRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *GetItemListRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+type GetItemListResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Code          int32                  `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
+	Message       string                 `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Items         []*ItemInfo            `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Total         int32                  `protobuf:"varint,4,opt,name=total,proto3" json:"total,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetItemListResponse) Reset() {
+	*x = GetItemListResponse{}
+	mi := &file_item_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetItemListResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetItemListResponse) ProtoMessage() {}
+
+func (x *GetItemListResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetItemListResponse.ProtoReflect.Descriptor instead.
+func (*GetItemListResponse) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetItemListResponse) GetCode() int32 {
+	if x != nil {
+		return x.Code
+	}
+	return 0
+}
+
+func (x *GetItemListResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *GetItemListResponse) GetItems() []*ItemInfo {
+	if x != nil {
+		return x.Items
+	}
+	return nil
+}
+
+func (x *GetItemListResponse) GetTotal() int32 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+type ItemInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ItemId        int32                  `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	ItemName      string                 `protobuf:"bytes,2,opt,name=item_name,json=itemName,proto3" json:"item_name,omitempty"`
+	Price         float32                `protobuf:"fixed32,3,opt,name=price,proto3" json:"price,omitempty"`
+	Stock         int32                  `protobuf:"varint,4,opt,name=stock,proto3" json:"stock,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ItemInfo) Reset() {
+	*x = ItemInfo{}
+	mi := &file_item_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ItemInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ItemInfo) ProtoMessage() {}
+
+func (x *ItemInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_item_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ItemInfo.ProtoReflect.Descriptor instead.
+func (*ItemInfo) Descriptor() ([]byte, []int) {
+	return file_item_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ItemInfo) GetItemId() int32 {
+	if x != nil {
+		return x.ItemId
+	}
+	return 0
+}
+
+func (x *ItemInfo) GetItemName() string {
+	if x != nil {
+		return x.ItemName
+	}
+	return ""
+}
+
+func (x *ItemInfo) GetPrice() float32 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+func (x *ItemInfo) GetStock() int32 {
+	if x != nil {
+		return x.Stock
+	}
+	return 0
+}
+
 var File_item_proto protoreflect.FileDescriptor
 
 const file_item_proto_rawDesc = "" +
@@ -264,11 +452,26 @@ const file_item_proto_rawDesc = "" +
 	"\bquantity\x18\x02 \x01(\x05R\bquantity\"E\n" +
 	"\x15DecreaseStockResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\x9c\x01\n" +
-	"\vItemService\x12A\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\"E\n" +
+	"\x12GetItemListRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\"\x7f\n" +
+	"\x13GetItemListResponse\x12\x12\n" +
+	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage\x12$\n" +
+	"\x05items\x18\x03 \x03(\v2\x0e.item.ItemInfoR\x05items\x12\x14\n" +
+	"\x05total\x18\x04 \x01(\x05R\x05total\"l\n" +
+	"\bItemInfo\x12\x17\n" +
+	"\aitem_id\x18\x01 \x01(\x05R\x06itemId\x12\x1b\n" +
+	"\titem_name\x18\x02 \x01(\tR\bitemName\x12\x14\n" +
+	"\x05price\x18\x03 \x01(\x02R\x05price\x12\x14\n" +
+	"\x05stock\x18\x04 \x01(\x05R\x05stock2\xac\x02\n" +
+	"\vItemService\x12?\n" +
 	"\n" +
-	"CreateItem\x12\x17.item.CreateItemRequest\x1a\x18.item.CreateItemResponse\"\x00\x12J\n" +
-	"\rDecreaseStock\x12\x1a.item.DecreaseStockRequest\x1a\x1b.item.DecreaseStockResponse\"\x00B\x1bZ\x19/internal/service;serviceb\x06proto3"
+	"CreateItem\x12\x17.item.CreateItemRequest\x1a\x18.item.CreateItemResponse\x12H\n" +
+	"\rDecreaseStock\x12\x1a.item.DecreaseStockRequest\x1a\x1b.item.DecreaseStockResponse\x12N\n" +
+	"\x13DecreaseStockRevert\x12\x1a.item.DecreaseStockRequest\x1a\x1b.item.DecreaseStockResponse\x12B\n" +
+	"\vGetItemList\x12\x18.item.GetItemListRequest\x1a\x19.item.GetItemListResponseB\x1bZ\x19/internal/service;serviceb\x06proto3"
 
 var (
 	file_item_proto_rawDescOnce sync.Once
@@ -282,23 +485,31 @@ func file_item_proto_rawDescGZIP() []byte {
 	return file_item_proto_rawDescData
 }
 
-var file_item_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_item_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_item_proto_goTypes = []any{
 	(*CreateItemRequest)(nil),     // 0: item.CreateItemRequest
 	(*CreateItemResponse)(nil),    // 1: item.CreateItemResponse
 	(*DecreaseStockRequest)(nil),  // 2: item.DecreaseStockRequest
 	(*DecreaseStockResponse)(nil), // 3: item.DecreaseStockResponse
+	(*GetItemListRequest)(nil),    // 4: item.GetItemListRequest
+	(*GetItemListResponse)(nil),   // 5: item.GetItemListResponse
+	(*ItemInfo)(nil),              // 6: item.ItemInfo
 }
 var file_item_proto_depIdxs = []int32{
-	0, // 0: item.ItemService.CreateItem:input_type -> item.CreateItemRequest
-	2, // 1: item.ItemService.DecreaseStock:input_type -> item.DecreaseStockRequest
-	1, // 2: item.ItemService.CreateItem:output_type -> item.CreateItemResponse
-	3, // 3: item.ItemService.DecreaseStock:output_type -> item.DecreaseStockResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	6, // 0: item.GetItemListResponse.items:type_name -> item.ItemInfo
+	0, // 1: item.ItemService.CreateItem:input_type -> item.CreateItemRequest
+	2, // 2: item.ItemService.DecreaseStock:input_type -> item.DecreaseStockRequest
+	2, // 3: item.ItemService.DecreaseStockRevert:input_type -> item.DecreaseStockRequest
+	4, // 4: item.ItemService.GetItemList:input_type -> item.GetItemListRequest
+	1, // 5: item.ItemService.CreateItem:output_type -> item.CreateItemResponse
+	3, // 6: item.ItemService.DecreaseStock:output_type -> item.DecreaseStockResponse
+	3, // 7: item.ItemService.DecreaseStockRevert:output_type -> item.DecreaseStockResponse
+	5, // 8: item.ItemService.GetItemList:output_type -> item.GetItemListResponse
+	5, // [5:9] is the sub-list for method output_type
+	1, // [1:5] is the sub-list for method input_type
+	1, // [1:1] is the sub-list for extension type_name
+	1, // [1:1] is the sub-list for extension extendee
+	0, // [0:1] is the sub-list for field type_name
 }
 
 func init() { file_item_proto_init() }
@@ -312,7 +523,7 @@ func file_item_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_item_proto_rawDesc), len(file_item_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   7,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

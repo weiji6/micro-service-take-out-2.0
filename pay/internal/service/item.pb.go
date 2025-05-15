@@ -264,11 +264,12 @@ const file_item_proto_rawDesc = "" +
 	"\bquantity\x18\x02 \x01(\x05R\bquantity\"E\n" +
 	"\x15DecreaseStockResponse\x12\x12\n" +
 	"\x04code\x18\x01 \x01(\x05R\x04code\x12\x18\n" +
-	"\amessage\x18\x02 \x01(\tR\amessage2\x9c\x01\n" +
-	"\vItemService\x12A\n" +
+	"\amessage\x18\x02 \x01(\tR\amessage2\xe8\x01\n" +
+	"\vItemService\x12?\n" +
 	"\n" +
-	"CreateItem\x12\x17.item.CreateItemRequest\x1a\x18.item.CreateItemResponse\"\x00\x12J\n" +
-	"\rDecreaseStock\x12\x1a.item.DecreaseStockRequest\x1a\x1b.item.DecreaseStockResponse\"\x00B\x1bZ\x19/internal/service;serviceb\x06proto3"
+	"CreateItem\x12\x17.item.CreateItemRequest\x1a\x18.item.CreateItemResponse\x12H\n" +
+	"\rDecreaseStock\x12\x1a.item.DecreaseStockRequest\x1a\x1b.item.DecreaseStockResponse\x12N\n" +
+	"\x13DecreaseStockRevert\x12\x1a.item.DecreaseStockRequest\x1a\x1b.item.DecreaseStockResponseB\x1bZ\x19/internal/service;serviceb\x06proto3"
 
 var (
 	file_item_proto_rawDescOnce sync.Once
@@ -292,10 +293,12 @@ var file_item_proto_goTypes = []any{
 var file_item_proto_depIdxs = []int32{
 	0, // 0: item.ItemService.CreateItem:input_type -> item.CreateItemRequest
 	2, // 1: item.ItemService.DecreaseStock:input_type -> item.DecreaseStockRequest
-	1, // 2: item.ItemService.CreateItem:output_type -> item.CreateItemResponse
-	3, // 3: item.ItemService.DecreaseStock:output_type -> item.DecreaseStockResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	2, // 2: item.ItemService.DecreaseStockRevert:input_type -> item.DecreaseStockRequest
+	1, // 3: item.ItemService.CreateItem:output_type -> item.CreateItemResponse
+	3, // 4: item.ItemService.DecreaseStock:output_type -> item.DecreaseStockResponse
+	3, // 5: item.ItemService.DecreaseStockRevert:output_type -> item.DecreaseStockResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name

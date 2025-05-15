@@ -4,8 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"google.golang.org/grpc/resolver"
 	"strings"
+
+	"google.golang.org/grpc/resolver"
 )
 
 type Server struct {

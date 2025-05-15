@@ -2,9 +2,10 @@ package client
 
 import (
 	"gateway/internal/service"
+	"log"
+
 	"github.com/spf13/viper"
 	"google.golang.org/grpc"
-	"log"
 )
 
 func NewPayClient() service.PayServiceClient {
